@@ -1,0 +1,21 @@
+
+
+sudo apt update
+sudo apt install -y docker.io
+sudo systemctl enable docker
+sudo systemctl start docker
+
+sudo usermod -aG docker $USER
+exit
+
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+curl -LO "https://dl.k8s.io/release/v1.25.0/bin/linux/amd64/kubectl"
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+kubectl version --client
+vi kind-config.yaml
+kind create cluster --config kind-config.yaml
+kubectl cluster-info
+kubectl get nodes
